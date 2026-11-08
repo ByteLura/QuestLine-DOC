@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Achievements — QuestLine Pro Documentation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">QuestLine <span>Pro</span></div>
+      <div class="brand-sub">Quests, Achievements &amp; Progression Trees for Unity</div>
+    </div>
+    <nav>
+      <ul>
+          <li class="nav-section">Getting Started</li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quick-start.html">Quick Start</a></li>
+          <li class="nav-section">Guides</li>
+          <li><a href="tree-editor.html">The Tree Editor</a></li>
+          <li><a href="runtime-and-tracker.html">Runtime &amp; the Tracker</a></li>
+          <li><a href="branching.html">Branching</a></li>
+          <li><a href="snapshots-and-save.html">Snapshots &amp; Save</a></li>
+          <li><a href="achievements.html" class="active">Achievements</a></li>
+          <li><a href="platform-adapters.html">Platform Adapters</a></li>
+          <li><a href="ui-kit.html">The UI Kit</a></li>
+          <li><a href="sample-guide.html">Sample Guide — The Ember Road</a></li>
+          <li class="nav-section">Reference</li>
+          <li><a href="api-summary.html">API Summary</a></li>
+          <li><a href="honest-limits.html">Honest Limits — What V1 Is Not</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="support.html">Support</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">Support<br><a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></div>
+  </aside>
+  <main class="content">
+    <header class="page-head">
+      <div class="kicker">Guides</div>
+      <h1>Achievements</h1>
+    </header>
+
+    <p class="lede">Achievements live in the same catalog as quests and
+    ride the same tracker, so an unlock is one event in one system — not
+    a second progression engine to keep in sync.</p>
+
+    <h2>Two shapes</h2>
+    <ul>
+      <li><strong>Quest-linked.</strong> Set <code>LinkedQuestId</code>
+      on the achievement definition. When that quest completes, the
+      achievement unlocks — once. A second unlock attempt is a no-op: no
+      event, no second adapter call.</li>
+      <li><strong>Progress.</strong> Set a progress target id and a
+      required count. Every matching progress report accrues; the
+      achievement unlocks exactly when the count reaches the target —
+      not before, not twice.</li>
+    </ul>
+
+    <h2>Hidden achievements</h2>
+    <p>Mark a definition <code>Hidden</code> and the quest log masks it
+    — the line reads “Hidden achievement” — until it unlocks. From the
+    unlock on, its real title shows.</p>
+
+    <h2>Where unlocks go</h2>
+    <p>The tracker's achievement component raises the unlock; the sync
+    service routes it to every registered platform adapter (see
+    <a href="platform-adapters.html">Platform Adapters</a>), and the
+    included toast queue shows it to the player. Progress reports route
+    the same way, carrying the platform id, the current count and the
+    target.</p>
+
+    <footer class="page-foot">
+      QuestLine Pro documentation &middot; ByteLura &middot; Support:
+      <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

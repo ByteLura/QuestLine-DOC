@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snapshots &amp; Save — QuestLine Pro Documentation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">QuestLine <span>Pro</span></div>
+      <div class="brand-sub">Quests, Achievements &amp; Progression Trees for Unity</div>
+    </div>
+    <nav>
+      <ul>
+          <li class="nav-section">Getting Started</li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quick-start.html">Quick Start</a></li>
+          <li class="nav-section">Guides</li>
+          <li><a href="tree-editor.html">The Tree Editor</a></li>
+          <li><a href="runtime-and-tracker.html">Runtime &amp; the Tracker</a></li>
+          <li><a href="branching.html">Branching</a></li>
+          <li><a href="snapshots-and-save.html" class="active">Snapshots &amp; Save</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="platform-adapters.html">Platform Adapters</a></li>
+          <li><a href="ui-kit.html">The UI Kit</a></li>
+          <li><a href="sample-guide.html">Sample Guide — The Ember Road</a></li>
+          <li class="nav-section">Reference</li>
+          <li><a href="api-summary.html">API Summary</a></li>
+          <li><a href="honest-limits.html">Honest Limits — What V1 Is Not</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="support.html">Support</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">Support<br><a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></div>
+  </aside>
+  <main class="content">
+    <header class="page-head">
+      <div class="kicker">Guides</div>
+      <h1>Snapshots &amp; Save</h1>
+    </header>
+
+    <h2>One snapshot for everything</h2>
+    <p><code>tracker.CaptureState()</code> returns one snapshot object
+    holding the whole quest state: every quest's state, active nodes,
+    objective counts, flags, stats, and achievement progress. The
+    snapshot is built from list-based data transfer objects, so
+    <code>ToJson()</code> / <code>FromJson()</code> round-trips through
+    JsonUtility with no custom serializer.</p>
+
+    <h2>Hand it to your save system</h2>
+    <p>QuestLine Pro is deliberately not a save system. The snapshot is
+    yours to store — file, cloud, platform — under your game's own
+    autosave policy, slots and corruption handling. Two convenience
+    stores ship for the common cases: a PlayerPrefs store and an
+    in-memory store, behind the <code>IQuestStateStore</code>
+    interface.</p>
+
+    <h2>Restore re-fires nothing</h2>
+    <p><code>tracker.RestoreState(snapshot)</code> rebuilds the state
+    exactly — and fires no completion events, no rewards, and no
+    achievement unlocks while doing so. A <code>StateRestored</code>
+    event fires once at the end so your UI can refresh. Loading a game
+    never double-grants a reward or replays an unlock; this behaviour is
+    covered by a dedicated acceptance test (restore-does-not-refire) on
+    both Unity targets.</p>
+
+    <h2>What a snapshot does not do</h2>
+    <p>It does not version your content for you: if a quest definition
+    changes shape between save and load, design your migration the way
+    you would for any save data. It also does not replicate itself —
+    networked games move the snapshot through their own transport.</p>
+
+    <footer class="page-foot">
+      QuestLine Pro documentation &middot; ByteLura &middot; Support:
+      <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

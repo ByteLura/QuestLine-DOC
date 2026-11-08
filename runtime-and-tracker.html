@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Runtime &amp; the Tracker — QuestLine Pro Documentation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">QuestLine <span>Pro</span></div>
+      <div class="brand-sub">Quests, Achievements &amp; Progression Trees for Unity</div>
+    </div>
+    <nav>
+      <ul>
+          <li class="nav-section">Getting Started</li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quick-start.html">Quick Start</a></li>
+          <li class="nav-section">Guides</li>
+          <li><a href="tree-editor.html">The Tree Editor</a></li>
+          <li><a href="runtime-and-tracker.html" class="active">Runtime &amp; the Tracker</a></li>
+          <li><a href="branching.html">Branching</a></li>
+          <li><a href="snapshots-and-save.html">Snapshots &amp; Save</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="platform-adapters.html">Platform Adapters</a></li>
+          <li><a href="ui-kit.html">The UI Kit</a></li>
+          <li><a href="sample-guide.html">Sample Guide — The Ember Road</a></li>
+          <li class="nav-section">Reference</li>
+          <li><a href="api-summary.html">API Summary</a></li>
+          <li><a href="honest-limits.html">Honest Limits — What V1 Is Not</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="support.html">Support</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">Support<br><a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></div>
+  </aside>
+  <main class="content">
+    <header class="page-head">
+      <div class="kicker">Guides</div>
+      <h1>Runtime &amp; the Tracker</h1>
+    </header>
+
+    <h2>The one-minute model</h2>
+    <ul>
+      <li>A <strong>catalog</strong> lists your quest and achievement
+      definitions.</li>
+      <li>A <strong>QuestTracker</strong> is constructed over a catalog
+      plus a reward sink. It owns all live state; definitions are never
+      mutated at runtime.</li>
+      <li>Your game reports events — progress on a target id, a flag
+      set, a stat change. The tracker routes each report to every active
+      objective and progress achievement listening for it, then settles
+      the graphs.</li>
+    </ul>
+
+    <figure class="doc-shot">
+      <img src="images/game-1.jpg" alt="Ember Road demo in the Unity Game view showing available and locked quest states alongside the tracker status panel">
+      <figcaption>The tracker at work in the Ember Road demo: quests shown as available or locked as state changes.</figcaption>
+    </figure>
+
+    <h2>How nodes advance (the pump)</h2>
+    <p>After every report, the tracker pumps each affected quest to a
+    fixed point: completed objective nodes grant their rewards (exactly
+    once, in order) and activate their successors; branch nodes evaluate
+    their conditions; End nodes complete the quest. The pump is bounded
+    (256 steps per quest per mutation) — a graph that cannot settle is a
+    content bug and stops with a warning, never an infinite loop.</p>
+
+    <h2>Reporting events</h2>
+    <pre><code>tracker.AddProgress("ember_shard");                 // collect-style targets
+tracker.AddProgress(QuestObjectiveKind.Interact, "gate_lever");
+tracker.SetFlag("spoke_to_gatekeeper");
+tracker.AddStat("reputation", 1);
+tracker.StartQuest("first_embers");
+tracker.FailQuest("first_embers", "The forge burned down.");</code></pre>
+
+    <h2>Events</h2>
+    <p>The tracker raises plain C# events your UI (or the included UI
+    kit) binds to: quest available / started / completed / failed, node
+    completed, objective progressed, achievement unlocked / progressed,
+    and state restored. Errors are state and events — never exceptions
+    across your game loop.</p>
+
+    <h2>Quest states</h2>
+    <p>Locked → Available → Active → Completed / Failed. Unlock
+    conditions on a quest definition (for example “First Steps is
+    complete”) are re-evaluated whenever the tracker changes; the demo's
+    policy of starting a quest the moment it unlocks is one line — your
+    game chooses its own start policy, or uses the tracker's
+    auto-start.</p>
+
+    <footer class="page-foot">
+      QuestLine Pro documentation &middot; ByteLura &middot; Support:
+      <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

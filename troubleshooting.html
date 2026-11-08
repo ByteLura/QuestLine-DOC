@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Troubleshooting — QuestLine Pro Documentation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">QuestLine <span>Pro</span></div>
+      <div class="brand-sub">Quests, Achievements &amp; Progression Trees for Unity</div>
+    </div>
+    <nav>
+      <ul>
+          <li class="nav-section">Getting Started</li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quick-start.html">Quick Start</a></li>
+          <li class="nav-section">Guides</li>
+          <li><a href="tree-editor.html">The Tree Editor</a></li>
+          <li><a href="runtime-and-tracker.html">Runtime &amp; the Tracker</a></li>
+          <li><a href="branching.html">Branching</a></li>
+          <li><a href="snapshots-and-save.html">Snapshots &amp; Save</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="platform-adapters.html">Platform Adapters</a></li>
+          <li><a href="ui-kit.html">The UI Kit</a></li>
+          <li><a href="sample-guide.html">Sample Guide — The Ember Road</a></li>
+          <li class="nav-section">Reference</li>
+          <li><a href="api-summary.html">API Summary</a></li>
+          <li><a href="honest-limits.html">Honest Limits — What V1 Is Not</a></li>
+          <li><a href="troubleshooting.html" class="active">Troubleshooting</a></li>
+          <li><a href="support.html">Support</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">Support<br><a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></div>
+  </aside>
+  <main class="content">
+    <header class="page-head">
+      <div class="kicker">Reference</div>
+      <h1>Troubleshooting</h1>
+    </header>
+
+    <h2>First stops inside the product</h2>
+    <ul>
+      <li><strong>Verify Install</strong> (home window, or Tools &gt;
+      ByteLura &gt; QuestLine Pro &gt; Verify Install) — six
+      plain-language checks: runtime loaded, a quest driven to
+      completion, a snapshot round-trip, a mock adapter unlock, the
+      sample found, the documentation found.</li>
+      <li><strong>Catalog Health</strong> (home window) — validation
+      results for every quest in your catalog, errors first, each with
+      an Open button that lands on the offending quest in the Tree
+      Editor. A clean catalog reads “All quests pass validation.”</li>
+    </ul>
+
+    <h2>Common situations</h2>
+    <h3>A quest never becomes Available</h3>
+    <p>Check its unlock conditions in the Inspector — a QuestCompleted
+    condition names the quest that must finish first. Availability is
+    re-evaluated on every tracker change; call
+    <code>RefreshAvailability()</code> after bulk state changes.</p>
+
+    <h3>An objective does not advance</h3>
+    <p>The report's target id must match the objective's target id
+    exactly, and the quest must be Active with that node active — a
+    wait-at-the-gate branch upstream holds everything behind it until
+    its conditions pass.</p>
+
+    <h3>A reward fired twice — or not at all</h3>
+    <p>Rewards fire once per node completion, through your sink.
+    Restoring a snapshot never re-fires them; if your sink applies them
+    twice, the duplication is in the sink.</p>
+
+    <h3>The Tree Editor shows an empty canvas</h3>
+    <p>The window opens on the quest you pick — use the toolbar picker,
+    or open a quest from the home window or its Inspector.</p>
+
+    <h3>Starter content is missing</h3>
+    <p>Delete <code>Assets/QuestLine Pro/</code> and click Create
+    Starter Content again. The package keeps no other project state; the
+    welcome toggle and catalog path live in EditorPrefs.</p>
+
+    <h3>Adapters report unavailable</h3>
+    <p>No transport is connected — that is the designed state until you
+    register your own <code>IPlatformTransport</code> implementation
+    (see <a href="platform-adapters.html">Platform Adapters</a>).</p>
+
+    <p>Still stuck? See the <a href="support.html">Support</a>
+    page.</p>
+
+    <footer class="page-foot">
+      QuestLine Pro documentation &middot; ByteLura &middot; Support:
+      <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

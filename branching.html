@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Branching — QuestLine Pro Documentation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">QuestLine <span>Pro</span></div>
+      <div class="brand-sub">Quests, Achievements &amp; Progression Trees for Unity</div>
+    </div>
+    <nav>
+      <ul>
+          <li class="nav-section">Getting Started</li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quick-start.html">Quick Start</a></li>
+          <li class="nav-section">Guides</li>
+          <li><a href="tree-editor.html">The Tree Editor</a></li>
+          <li><a href="runtime-and-tracker.html">Runtime &amp; the Tracker</a></li>
+          <li><a href="branching.html" class="active">Branching</a></li>
+          <li><a href="snapshots-and-save.html">Snapshots &amp; Save</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="platform-adapters.html">Platform Adapters</a></li>
+          <li><a href="ui-kit.html">The UI Kit</a></li>
+          <li><a href="sample-guide.html">Sample Guide — The Ember Road</a></li>
+          <li class="nav-section">Reference</li>
+          <li><a href="api-summary.html">API Summary</a></li>
+          <li><a href="honest-limits.html">Honest Limits — What V1 Is Not</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="support.html">Support</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">Support<br><a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></div>
+  </aside>
+  <main class="content">
+    <header class="page-head">
+      <div class="kicker">Guides</div>
+      <h1>Branching</h1>
+    </header>
+
+    <p class="lede">A Branch node carries a list of conditions (all
+    must pass) and one of two branch modes. The two modes are different
+    tools; each quest gate uses exactly one, and they are never mixed on
+    the same node.</p>
+
+    <figure class="doc-shot">
+      <img src="images/editor-2.jpg" alt="Quest Tree Editor showing The Branching Path quest with a branch node labelled Spoke with the elder and Condition met and Condition not met ports">
+      <figcaption>The Branching Path in the tree editor: a branch node with Condition met and Condition not met ports.</figcaption>
+    </figure>
+
+    <h2>Wait until met (the gate)</h2>
+    <p>The route holds at the branch node while its conditions are
+    false. Nothing downstream activates. The moment a later report makes
+    the conditions pass, the met route activates.</p>
+    <p>Use it for gates: speak to the gatekeeper before the lever works,
+    hold a key item before the door objective opens.</p>
+    <div class="callout">
+      <p><em>In the demo:</em> The Gatekeeper's Price waits on the
+      <code>spoke_to_gatekeeper</code> flag. Pulling the lever early
+      does nothing; the objective is not active yet.</p>
+    </div>
+
+    <h2>Route immediately (the fork)</h2>
+    <p>The branch evaluates once, the moment it activates, and takes a
+    side: the met route if the conditions pass, the not-met target if
+    they do not. It never re-evaluates — the road is chosen.</p>
+    <p>Use it for forks: the warden's road for a known name, the toll
+    road for everyone else.</p>
+    <div class="callout">
+      <p><em>In the demo:</em> Two Roads checks reputation ≥ 5 at the
+      branch. Below 5, the toll road activates (gather 4 toll coins).
+      Both roads rejoin at a shared Reward node.</p>
+    </div>
+
+    <h2>Conditions</h2>
+    <p>Condition kinds include flag set, stat at least, quest completed,
+    and custom keys your game evaluates. Unlock conditions on a quest
+    definition use the same condition data — a quest can stay Locked
+    until another quest completes, a flag is set, or a stat reaches a
+    value.</p>
+
+    <footer class="page-foot">
+      QuestLine Pro documentation &middot; ByteLura &middot; Support:
+      <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

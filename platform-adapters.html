@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Platform Adapters — QuestLine Pro Documentation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">QuestLine <span>Pro</span></div>
+      <div class="brand-sub">Quests, Achievements &amp; Progression Trees for Unity</div>
+    </div>
+    <nav>
+      <ul>
+          <li class="nav-section">Getting Started</li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quick-start.html">Quick Start</a></li>
+          <li class="nav-section">Guides</li>
+          <li><a href="tree-editor.html">The Tree Editor</a></li>
+          <li><a href="runtime-and-tracker.html">Runtime &amp; the Tracker</a></li>
+          <li><a href="branching.html">Branching</a></li>
+          <li><a href="snapshots-and-save.html">Snapshots &amp; Save</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="platform-adapters.html" class="active">Platform Adapters</a></li>
+          <li><a href="ui-kit.html">The UI Kit</a></li>
+          <li><a href="sample-guide.html">Sample Guide — The Ember Road</a></li>
+          <li class="nav-section">Reference</li>
+          <li><a href="api-summary.html">API Summary</a></li>
+          <li><a href="honest-limits.html">Honest Limits — What V1 Is Not</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="support.html">Support</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">Support<br><a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></div>
+  </aside>
+  <main class="content">
+    <header class="page-head">
+      <div class="kicker">Guides</div>
+      <h1>Platform Adapters</h1>
+    </header>
+
+    <p class="lede">The honest page. Read it before you plan your Steam
+    or Epic launch around this package.</p>
+
+    <h2>What ships</h2>
+    <ul>
+      <li>An adapter layer: a Steam adapter and an Epic adapter over a
+      transport interface (<code>IPlatformTransport</code>) that your
+      code implements against your platform SDK.</li>
+      <li>A recording mock transport used to verify the layer.</li>
+      <li>A sync service that routes unlocks and progress reports to
+      every registered adapter.</li>
+    </ul>
+
+    <h2>What is verified</h2>
+    <p>The adapter logic is verified against the included mock harness:
+    platform-id mapping (an achievement's Steam id reaches the
+    transport; the Epic adapter falls back to the definition id when no
+    Epic id is set), routing to all registered adapters, progress calls
+    carrying id + current + target, and the no-transport behaviour —
+    adapters report unavailable, calls return false, nothing throws.
+    This evidence is mock evidence, and it is labelled that way
+    everywhere: this page, the home window's Platform Sync section, and
+    the demo's on-screen note.</p>
+
+    <h2>What is not verified — and not claimed</h2>
+    <div class="callout">
+      <p>No live Steam or Epic sync has been tested. No platform SDK is
+      bundled and no native platform call is made by this package. Live
+      verification needs your partner app ID and your SDK, which only
+      exist in your project.</p>
+    </div>
+
+    <h2>Going live</h2>
+    <ol>
+      <li>Implement <code>IPlatformTransport</code> over your SDK:
+      unlock and progress calls arrive with the platform achievement id
+      resolved for you.</li>
+      <li>Register the shipped adapters with your transport instead of
+      the mock.</li>
+      <li>Set platform ids on your achievement definitions (Steam id,
+      Epic id; the definition id is the fallback).</li>
+    </ol>
+
+    <p>Support: <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></p>
+
+    <footer class="page-foot">
+      QuestLine Pro documentation &middot; ByteLura &middot; Support:
+      <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

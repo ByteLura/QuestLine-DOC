@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The UI Kit — QuestLine Pro Documentation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">QuestLine <span>Pro</span></div>
+      <div class="brand-sub">Quests, Achievements &amp; Progression Trees for Unity</div>
+    </div>
+    <nav>
+      <ul>
+          <li class="nav-section">Getting Started</li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quick-start.html">Quick Start</a></li>
+          <li class="nav-section">Guides</li>
+          <li><a href="tree-editor.html">The Tree Editor</a></li>
+          <li><a href="runtime-and-tracker.html">Runtime &amp; the Tracker</a></li>
+          <li><a href="branching.html">Branching</a></li>
+          <li><a href="snapshots-and-save.html">Snapshots &amp; Save</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="platform-adapters.html">Platform Adapters</a></li>
+          <li><a href="ui-kit.html" class="active">The UI Kit</a></li>
+          <li><a href="sample-guide.html">Sample Guide — The Ember Road</a></li>
+          <li class="nav-section">Reference</li>
+          <li><a href="api-summary.html">API Summary</a></li>
+          <li><a href="honest-limits.html">Honest Limits — What V1 Is Not</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="support.html">Support</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">Support<br><a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></div>
+  </aside>
+  <main class="content">
+    <header class="page-head">
+      <div class="kicker">Guides</div>
+      <h1>The UI Kit</h1>
+    </header>
+
+    <p class="lede">Three uGUI components, built from code at runtime —
+    no prefabs to wire, no canvas to set up by hand.
+    <code>QuestUiFactory.BuildAll</code> creates the set (canvas, HUD,
+    log panel, toast queue) bound-ready for a tracker.</p>
+
+    <ul>
+      <li><strong>Tracker HUD.</strong> The active quest with live
+      objective lines: each line carries the current count and the
+      target; a completed objective reads complete. Formatter-driven, so
+      the text rules (including hidden-achievement masking) are
+      unit-tested, not eyeballed.</li>
+      <li><strong>Quest log.</strong> Quests listed in state sections —
+      active, available, completed, failed — with achievements below;
+      hidden achievements read masked until they unlock.</li>
+      <li><strong>Toast queue.</strong> Completion, reward and
+      achievement toasts surface in arrival order, one at a time (3.5 s
+      by default; the timing is a public field), and the queue drains to
+      empty.</li>
+    </ul>
+
+    <p>The kit uses uGUI's built-in Text — no TextMeshPro, no added
+    package dependency. Treat it as a working starting point: restyle
+    the factories, or bind your own UI to the same tracker events and
+    drop the kit entirely.</p>
+
+    <footer class="page-foot">
+      QuestLine Pro documentation &middot; ByteLura &middot; Support:
+      <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

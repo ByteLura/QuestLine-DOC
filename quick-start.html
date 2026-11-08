@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick Start — QuestLine Pro Documentation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">QuestLine <span>Pro</span></div>
+      <div class="brand-sub">Quests, Achievements &amp; Progression Trees for Unity</div>
+    </div>
+    <nav>
+      <ul>
+          <li class="nav-section">Getting Started</li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quick-start.html" class="active">Quick Start</a></li>
+          <li class="nav-section">Guides</li>
+          <li><a href="tree-editor.html">The Tree Editor</a></li>
+          <li><a href="runtime-and-tracker.html">Runtime &amp; the Tracker</a></li>
+          <li><a href="branching.html">Branching</a></li>
+          <li><a href="snapshots-and-save.html">Snapshots &amp; Save</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="platform-adapters.html">Platform Adapters</a></li>
+          <li><a href="ui-kit.html">The UI Kit</a></li>
+          <li><a href="sample-guide.html">Sample Guide — The Ember Road</a></li>
+          <li class="nav-section">Reference</li>
+          <li><a href="api-summary.html">API Summary</a></li>
+          <li><a href="honest-limits.html">Honest Limits — What V1 Is Not</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="support.html">Support</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">Support<br><a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></div>
+  </aside>
+  <main class="content">
+    <header class="page-head">
+      <div class="kicker">Getting Started</div>
+      <h1>Quick Start</h1>
+    </header>
+
+    <p class="lede">From import to a quest completing itself on screen,
+    in about ten minutes. Every name below is the name you will see in
+    the editor.</p>
+
+    <div class="callout">
+      <p><strong>Requirement:</strong> the UI kit and the demo build
+      their screens with Unity's UGUI package
+      (<code>com.unity.ugui</code>). It is included in the standard Unity
+      project templates; if your project was created from a minimal
+      template without it, add <strong>UGUI</strong> from the Package
+      Manager before importing — the package itself declares no
+      dependencies.</p>
+    </div>
+
+    <h2>1. Open the home window</h2>
+    <p><strong>Tools &gt; ByteLura &gt; QuestLine Pro.</strong> The
+    window opens on a welcome header: what the package does, the six
+    things you will use most, and your catalog once one exists.</p>
+
+    <h2>2. Create the starter content</h2>
+    <p>Click <strong>Create Starter Content</strong>. It creates, under
+    <code>Assets/QuestLine Pro/</code>:</p>
+    <ul>
+      <li>a catalog asset, selected for you;</li>
+      <li><strong>First Steps</strong> — a three-node quest (Start →
+      gather 3 training tokens → End) with an experience reward on the
+      gather node;</li>
+      <li><strong>The Branching Path</strong> — a quest locked behind
+      First Steps, whose gate node waits for a conversation flag before
+      the bell objective opens;</li>
+      <li>two achievements: <strong>First Steps Complete</strong> and
+      <strong>Token Collector</strong>.</li>
+    </ul>
+    <p>Running it again changes nothing — it reports that the starter
+    content already exists and leaves your edits alone.</p>
+
+    <h2>3. Look at the quest tree</h2>
+    <p>In the home window, click <strong>Open in Tree Editor</strong> on
+    First Steps. You are looking at the quest as a graph. Click the
+    objective node: the panel on the right shows its objective (Collect,
+    target <code>training_token</code>, 3 required) and its reward. Drag
+    a node — its position saves into the quest asset. Click
+    <strong>Validate</strong>: the graph is clean.</p>
+
+    <h2>4. Run the demo end to end</h2>
+    <p>Click <strong>Open the Ember Road Demo</strong> and press
+    Play.</p>
+    <ul>
+      <li><strong>First Embers</strong> is already active in the tracker
+      HUD. The demo starts each quest the moment it unlocks.</li>
+      <li>Click <strong>Collect Ember Shard</strong> three times. The
+      objective counts up; the quest completes; toasts report the
+      completion, the reward, and the <strong>First Embers
+      Complete</strong> achievement.</li>
+      <li><strong>The Gatekeeper's Price</strong> starts. <strong>Pull
+      the Gate Lever</strong> does nothing yet — click <strong>Speak to
+      the Gatekeeper</strong> first, then pull the lever to finish and
+      receive the gate key.</li>
+      <li><strong>Two Roads</strong> starts and its branch routes
+      immediately: reputation below 5 sends you down the toll road.
+      Finish either road; both rejoin at a reward node, and <strong>Road
+      Walker</strong> unlocks.</li>
+    </ul>
+
+    <h2>5. Your first quest of your own</h2>
+    <ol>
+      <li>Duplicate the First Steps quest asset and add it to your
+      catalog.</li>
+      <li>Open it in the Tree Editor. Add an Objective node, connect
+      Start → your node → End, and set its objective: a kind, the target
+      id your game will report, and a required count.</li>
+      <li>In your game code, report the event where it happens:</li>
+    </ol>
+    <pre><code>QuestLineRuntime.Instance.Tracker.AddProgress("training_token");</code></pre>
+    <p>That call is the whole integration surface for progress. The full
+    surface — starting and failing quests, flags, stats, snapshots — is
+    in the <a href="api-summary.html">API Summary</a>.</p>
+
+    <p>Support: <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></p>
+
+    <footer class="page-foot">
+      QuestLine Pro documentation &middot; ByteLura &middot; Support:
+      <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

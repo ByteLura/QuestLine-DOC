@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QuestLine Pro — QuestLine Pro Documentation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">QuestLine <span>Pro</span></div>
+      <div class="brand-sub">Quests, Achievements &amp; Progression Trees for Unity</div>
+    </div>
+    <nav>
+      <ul>
+          <li class="nav-section">Getting Started</li>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="quick-start.html">Quick Start</a></li>
+          <li class="nav-section">Guides</li>
+          <li><a href="tree-editor.html">The Tree Editor</a></li>
+          <li><a href="runtime-and-tracker.html">Runtime &amp; the Tracker</a></li>
+          <li><a href="branching.html">Branching</a></li>
+          <li><a href="snapshots-and-save.html">Snapshots &amp; Save</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="platform-adapters.html">Platform Adapters</a></li>
+          <li><a href="ui-kit.html">The UI Kit</a></li>
+          <li><a href="sample-guide.html">Sample Guide — The Ember Road</a></li>
+          <li class="nav-section">Reference</li>
+          <li><a href="api-summary.html">API Summary</a></li>
+          <li><a href="honest-limits.html">Honest Limits — What V1 Is Not</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="support.html">Support</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">Support<br><a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></div>
+  </aside>
+  <main class="content">
+    <header class="page-head">
+      <div class="kicker">Documentation — Home</div>
+      <h1>QuestLine Pro</h1>
+    </header>
+
+    <p class="lede">QuestLine Pro is a quest, achievement and progression
+    system for Unity. You draw each quest as a graph in the tree editor, a
+    deterministic runtime tracker plays that graph in your game, and the
+    same system carries achievements, save-game snapshots, and platform
+    sync.</p>
+
+    <figure class="doc-hero">
+      <img src="images/hero.jpg" alt="QuestLine Pro home window in Unity showing a verified install, the active quest catalog and catalog health">
+      <figcaption>The QuestLine Pro home window: install verified, catalog loaded, and all quests passing validation.</figcaption>
+    </figure>
+
+    <h2>The four parts</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Data</h3>
+        <p>One ScriptableObject asset per quest and per achievement, listed
+        in a catalog asset. Definitions are plain serialized fields —
+        readable in the normal Inspector, friendly to version control.</p>
+      </div>
+      <div class="card">
+        <h3>Tree Editor</h3>
+        <p>A GraphView window where quests are authored as graphs: Start,
+        Objective, Branch, Reward and End nodes wired port to port.
+        Everything writes back into the quest asset as it happens.</p>
+      </div>
+      <div class="card">
+        <h3>Runtime</h3>
+        <p>The QuestTracker runs the graphs: objective counters,
+        conditions, both branch styles, rewards that fire exactly once,
+        and a whole-state snapshot your own save system can store.</p>
+      </div>
+      <div class="card">
+        <h3>Sync</h3>
+        <p>Achievements unlock through the tracker and route to Steam and
+        Epic adapter classes. The adapter layer is verified against the
+        included mock harness; you connect your own platform SDK transport
+        to go live (see <a href="platform-adapters.html">Platform
+        Adapters</a>).</p>
+      </div>
+    </div>
+
+    <h2>Who it is for</h2>
+    <p>Unity projects that need quests, achievements and progression in
+    one system instead of three: author the quest once as a graph, report
+    progress from your game code with one call, and let the tracker settle
+    states, rewards, achievements and snapshots. The loop from “quest
+    accepted” to “achievement unlocked” lives in one place instead of
+    being re-invented per project.</p>
+
+    <h2>Included UI</h2>
+    <p>A tracker HUD, a quest log and an achievement toast queue, all
+    built from code at runtime — no prefabs to wire. Restyle or replace
+    them freely; they bind to the tracker's events. See
+    <a href="ui-kit.html">The UI Kit</a>.</p>
+
+    <h2>Honest scope</h2>
+    <p>Version 1 is a quest system, not a dialogue system, an inventory,
+    or a save system, and the Steam and Epic adapters are verified
+    against a mock transport — no live platform sync has been tested.
+    The full list is written down on the
+    <a href="honest-limits.html">Honest Limits</a> page so you can plan
+    around it.</p>
+
+    <h2>Requirements</h2>
+    <ul>
+      <li>Unity 2022.3 LTS or Unity 6 (tested on 2022.3.22f1 and
+      6000.5.4f1).</li>
+      <li>No package dependencies. Nothing else to install. The UI kit
+      and the demo use Unity's UGUI package, which ships with the
+      standard project templates — see the note in
+      <a href="quick-start.html">Quick Start</a>.</li>
+    </ul>
+
+    <h2>Screenshots</h2>
+    <div class="doc-gallery">
+      <figure class="doc-shot">
+        <img src="images/editor-1.jpg" alt="Quest Tree Editor showing the First Steps quest as a Start node wired to an objective node and a Quest complete node">
+        <figcaption>The tree editor: the First Steps quest drawn as a graph, from Start to completion.</figcaption>
+      </figure>
+      <figure class="doc-shot">
+        <img src="images/editor-3.jpg" alt="Quest Tree Editor showing the Two Roads quest with a branch node splitting into two routes that rejoin at a shared reward node">
+        <figcaption>A branching quest in the tree editor: two routes split at a branch node and rejoin at a shared reward.</figcaption>
+      </figure>
+      <figure class="doc-shot">
+        <img src="images/game-1.jpg" alt="Ember Road demo running in the Unity Game view, showing quest states and the demo driver controls">
+        <figcaption>The Ember Road demo running in the Game view, with quest states reported by the tracker.</figcaption>
+      </figure>
+    </div>
+
+    <h2>Start here</h2>
+    <p>The <a href="quick-start.html">Quick Start</a> takes you from
+    import to a quest completing itself on screen in about ten minutes,
+    using the two starter quests, then walks the Ember Road demo end to
+    end.</p>
+
+    <h2>Support</h2>
+    <p>Questions and bug reports:
+    <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a> — see the
+    <a href="support.html">Support</a> page for what is covered.</p>
+
+    <footer class="page-foot">
+      QuestLine Pro documentation &middot; ByteLura &middot; Support:
+      <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

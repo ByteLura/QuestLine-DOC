@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API Summary — QuestLine Pro Documentation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">QuestLine <span>Pro</span></div>
+      <div class="brand-sub">Quests, Achievements &amp; Progression Trees for Unity</div>
+    </div>
+    <nav>
+      <ul>
+          <li class="nav-section">Getting Started</li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quick-start.html">Quick Start</a></li>
+          <li class="nav-section">Guides</li>
+          <li><a href="tree-editor.html">The Tree Editor</a></li>
+          <li><a href="runtime-and-tracker.html">Runtime &amp; the Tracker</a></li>
+          <li><a href="branching.html">Branching</a></li>
+          <li><a href="snapshots-and-save.html">Snapshots &amp; Save</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="platform-adapters.html">Platform Adapters</a></li>
+          <li><a href="ui-kit.html">The UI Kit</a></li>
+          <li><a href="sample-guide.html">Sample Guide — The Ember Road</a></li>
+          <li class="nav-section">Reference</li>
+          <li><a href="api-summary.html" class="active">API Summary</a></li>
+          <li><a href="honest-limits.html">Honest Limits — What V1 Is Not</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="support.html">Support</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">Support<br><a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></div>
+  </aside>
+  <main class="content">
+    <header class="page-head">
+      <div class="kicker">Reference</div>
+      <h1>API Summary</h1>
+    </header>
+
+    <p class="lede">The integration surface, in one page. The shipped
+    ApiReference.md carries the full contract; this is the map.</p>
+
+    <h2>Bootstrap</h2>
+    <ul>
+      <li><code>QuestLineRuntime</code> — the MonoBehaviour bootstrap:
+      builds a tracker over your catalog with your reward sink, exposes
+      <code>Tracker</code>.</li>
+      <li>Or construct directly: <code>new QuestTracker(catalog,
+      rewardSink)</code>.</li>
+    </ul>
+
+    <h2>Tracker</h2>
+    <table>
+      <tr><th>Area</th><th>Calls</th></tr>
+      <tr><td>Progress</td>
+        <td><code>AddProgress(targetId)</code>,
+        <code>AddProgress(kind, targetId)</code></td></tr>
+      <tr><td>World state</td>
+        <td><code>SetFlag(id)</code>, <code>AddStat(id, delta)</code></td></tr>
+      <tr><td>Lifecycle</td>
+        <td><code>StartQuest(id)</code>, <code>FailQuest(id,
+        reason)</code>, <code>RefreshAvailability()</code></td></tr>
+      <tr><td>Reads</td>
+        <td><code>GetQuestState(id)</code>,
+        <code>GetObjectiveCount(questId, nodeId, objectiveId)</code></td></tr>
+      <tr><td>State</td>
+        <td><code>CaptureState()</code>, <code>RestoreState(snapshot)</code></td></tr>
+      <tr><td>Events</td>
+        <td>QuestAvailable / QuestStarted / QuestCompleted / QuestFailed,
+        NodeCompleted, ObjectiveProgressed, StateRestored; achievements
+        via <code>tracker.Achievements</code> (AchievementUnlocked,
+        AchievementProgressed)</td></tr>
+    </table>
+
+    <h2>Your two implementations</h2>
+    <ul>
+      <li><strong>Reward sink</strong> — receives each granted reward
+      once, in order (kind, reference id, amount, custom key). Apply it
+      to your inventory/economy; the tracker never owns the goods.</li>
+      <li><strong>Platform transport</strong> —
+      <code>IPlatformTransport</code> over your SDK for live sync (see
+      <a href="platform-adapters.html">Platform Adapters</a>).</li>
+    </ul>
+
+    <h2>Definitions</h2>
+    <p>Plain serializable data: <code>QuestDefinition</code> (nodes,
+    unlock conditions), <code>QuestNodeData</code> (kind, objectives,
+    conditions, rewards, routes, graph position),
+    <code>AchievementDefinition</code> (linked quest or progress target,
+    platform ids, hidden flag), all listed by a
+    <code>QuestCatalog</code>. Titles resolve through
+    <code>QuestTextResolver</code> — every player-facing string carries
+    a key, so your localization pipeline can replace the resolver.</p>
+
+    <footer class="page-foot">
+      QuestLine Pro documentation &middot; ByteLura &middot; Support:
+      <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

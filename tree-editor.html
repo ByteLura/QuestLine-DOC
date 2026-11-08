@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Tree Editor — QuestLine Pro Documentation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">QuestLine <span>Pro</span></div>
+      <div class="brand-sub">Quests, Achievements &amp; Progression Trees for Unity</div>
+    </div>
+    <nav>
+      <ul>
+          <li class="nav-section">Getting Started</li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quick-start.html">Quick Start</a></li>
+          <li class="nav-section">Guides</li>
+          <li><a href="tree-editor.html" class="active">The Tree Editor</a></li>
+          <li><a href="runtime-and-tracker.html">Runtime &amp; the Tracker</a></li>
+          <li><a href="branching.html">Branching</a></li>
+          <li><a href="snapshots-and-save.html">Snapshots &amp; Save</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="platform-adapters.html">Platform Adapters</a></li>
+          <li><a href="ui-kit.html">The UI Kit</a></li>
+          <li><a href="sample-guide.html">Sample Guide — The Ember Road</a></li>
+          <li class="nav-section">Reference</li>
+          <li><a href="api-summary.html">API Summary</a></li>
+          <li><a href="honest-limits.html">Honest Limits — What V1 Is Not</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="support.html">Support</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">Support<br><a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></div>
+  </aside>
+  <main class="content">
+    <header class="page-head">
+      <div class="kicker">Guides</div>
+      <h1>The Tree Editor</h1>
+    </header>
+
+    <p class="lede">Open it from the home window (<strong>Open in Tree
+    Editor</strong> on any quest), from <strong>Tools &gt; ByteLura &gt;
+    QuestLine Pro &gt; Tree Editor</strong>, or from a quest asset's
+    Inspector (<strong>Open in Tree Editor</strong> button).</p>
+
+    <figure class="doc-shot">
+      <img src="images/inspector-1.jpg" alt="Quest Tree Editor beside the Inspector panel for the First Steps quest definition, showing clean graph validation">
+      <figcaption>The tree editor beside the quest Inspector, where definition fields and graph validation sit side by side.</figcaption>
+    </figure>
+
+    <h2>The canvas</h2>
+    <p>The canvas is Unity's GraphView — the same grid, minimap, zoom
+    and port wiring you know from Shader Graph. The toolbar carries a
+    quest picker, one Add button per node kind (Start, Objective,
+    Branch, Reward, End), <strong>Validate</strong> and
+    <strong>Save</strong>.</p>
+
+    <h2>Node kinds and their ports</h2>
+    <table>
+      <tr><th>Node</th><th>Ports</th><th>What it carries</th></tr>
+      <tr>
+        <td><strong>Start</strong></td><td>Output only</td>
+        <td>The entry point. Every quest needs exactly one.</td>
+      </tr>
+      <tr>
+        <td><strong>Objective</strong></td><td>Input + output</td>
+        <td>Objectives (kind, target id, required count) and the rewards
+        granted when the node completes.</td>
+      </tr>
+      <tr>
+        <td><strong>Branch</strong></td><td>Input + two outputs</td>
+        <td>A condition gate with two output ports: <em>Condition
+        met</em> and <em>Condition not met</em>. Its branch mode decides
+        what the gate does at runtime (see
+        <a href="branching.html">Branching</a>).</td>
+      </tr>
+      <tr>
+        <td><strong>Reward</strong></td><td>Input + output</td>
+        <td>A node whose rewards are granted when the route passes
+        through it; the place two roads rejoin.</td>
+      </tr>
+      <tr>
+        <td><strong>End</strong></td><td>Input only</td>
+        <td>The quest completes here.</td>
+      </tr>
+    </table>
+
+    <h2>The graph is the asset</h2>
+    <p>Every interaction writes straight back into the quest
+    definition:</p>
+    <ul>
+      <li>An edge from a Next or Condition-met port becomes a route in
+      the node's successor list (the met route holds a single
+      target).</li>
+      <li>An edge from a Condition-not-met port becomes the node's
+      not-met target.</li>
+      <li>Dragging a node saves its graph position.</li>
+      <li>Deleting an edge removes the route; deleting a node scrubs its
+      id from every route that referenced it.</li>
+    </ul>
+    <p>Close the window, reopen the quest, and the tree is exactly as
+    you left it. Select a node to edit its title, kind, branch mode,
+    objectives, conditions and rewards in the right-hand panel, in plain
+    language.</p>
+
+    <h2>Validation</h2>
+    <p><strong>Validate</strong> runs the same checks as the home
+    window's Catalog Health and the quest Inspector. Errors name the
+    problem precisely — a missing Start node, an edge pointing at a node
+    that does not exist, duplicate node ids — so the fix is always one
+    action away.</p>
+
+    <footer class="page-foot">
+      QuestLine Pro documentation &middot; ByteLura &middot; Support:
+      <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Honest Limits — What V1 Is Not — QuestLine Pro Documentation</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">QuestLine <span>Pro</span></div>
+      <div class="brand-sub">Quests, Achievements &amp; Progression Trees for Unity</div>
+    </div>
+    <nav>
+      <ul>
+          <li class="nav-section">Getting Started</li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quick-start.html">Quick Start</a></li>
+          <li class="nav-section">Guides</li>
+          <li><a href="tree-editor.html">The Tree Editor</a></li>
+          <li><a href="runtime-and-tracker.html">Runtime &amp; the Tracker</a></li>
+          <li><a href="branching.html">Branching</a></li>
+          <li><a href="snapshots-and-save.html">Snapshots &amp; Save</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="platform-adapters.html">Platform Adapters</a></li>
+          <li><a href="ui-kit.html">The UI Kit</a></li>
+          <li><a href="sample-guide.html">Sample Guide — The Ember Road</a></li>
+          <li class="nav-section">Reference</li>
+          <li><a href="api-summary.html">API Summary</a></li>
+          <li><a href="honest-limits.html" class="active">Honest Limits — What V1 Is Not</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="support.html">Support</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">Support<br><a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a></div>
+  </aside>
+  <main class="content">
+    <header class="page-head">
+      <div class="kicker">Reference</div>
+      <h1>Honest Limits — What V1 Is Not</h1>
+    </header>
+
+    <p class="lede">An honest scope list for version 1.0.0, written down
+    so you can plan around it instead of discovering it.</p>
+
+    <ul>
+      <li><strong>Not a live platform integration.</strong> The Steam
+      and Epic adapters ship with a transport interface and a mock
+      transport, verified against the mock only. No platform SDK is
+      bundled, no native calls are made, and no live sync was tested —
+      live verification needs your partner app ID and your SDK.</li>
+      <li><strong>Not a dialogue system.</strong> Quests reference
+      conversations through flags your game sets (“spoke to the
+      gatekeeper”); the conversations themselves belong to your dialogue
+      tooling.</li>
+      <li><strong>Not an inventory or economy system.</strong> Rewards
+      report intent through your reward sink. Your inventory and economy
+      apply them; the tracker never owns item state beyond an optional
+      item-count view for conditions.</li>
+      <li><strong>Not a translation engine.</strong> Localization-ready
+      means every player-facing string carries a key and resolves
+      through one replaceable resolver. Translating the strings is your
+      localization pipeline's job.</li>
+      <li><strong>Not visual scripting for gameplay logic.</strong> The
+      tree editor authors quest structure. What your game does when an
+      objective target is reported stays your code.</li>
+      <li><strong>No multiplayer authority model.</strong> The tracker
+      is a plain C# object; which side of a network session owns it, and
+      how its snapshots replicate, is your architecture's decision.</li>
+      <li><strong>No quest content beyond the starter quests and the
+      demo.</strong> They teach the system and prove it end to end. Your
+      game's quests are the content; this package is the system they run
+      on.</li>
+      <li><strong>Not a save system.</strong> Snapshots are yours to
+      store — the tracker produces and consumes them and ships two
+      convenience stores, but autosave policy, slots UI and corruption
+      recovery belong to your game.</li>
+    </ul>
+
+    <footer class="page-foot">
+      QuestLine Pro documentation &middot; ByteLura &middot; Support:
+      <a href="mailto:bytelura@gmail.com">bytelura@gmail.com</a>
+    </footer>
+  </main>
+</div>
+</body>
+</html>
